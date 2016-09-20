@@ -1,0 +1,2 @@
+class South < Direction
+end

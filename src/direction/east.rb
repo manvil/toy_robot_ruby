@@ -1,0 +1,2 @@
+class East < Direction
+end

@@ -1,0 +1,2 @@
+class North < Direction
+end

@@ -1,0 +1,2 @@
+class West < Direction
+end
