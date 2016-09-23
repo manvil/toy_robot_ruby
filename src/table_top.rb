@@ -21,7 +21,7 @@ class TableTop
 
   def turn(side)
     return unless placed?
-    @robot.direction = @robot.direction.send(side)
+    @robot.turn(side)
   end
 
   def invalid(command)

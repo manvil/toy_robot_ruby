@@ -1,15 +1,4 @@
-# Load the main files under the source folder
-Dir[
-  "#{File.dirname(__FILE__)}/src/*.rb"
-].each { |f| require File.join(Dir.pwd, f) }
-
-# Load the secondary files
-# The loading of main ruby files is done in order to avoid
-# recursive loading
-Dir[
-  "#{File.dirname(__FILE__)}/src/**/*.rb"
-].each { |f| require File.join(Dir.pwd, f) }
-
+require File.join(Dir.pwd, 'load')
 top = TableTop.new(5, 5)
 parser = Parser.new
 

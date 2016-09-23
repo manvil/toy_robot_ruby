@@ -15,9 +15,9 @@ class Direction
   }.freeze
 
   def initialize
-    @delta_point = Point.new(*Direction::DELTA[self.class.name.downcase.to_sym])
-  rescue => e
-    raise "Unknown direction"
+    self.delta_point = Direction::DELTA[self.class.name.downcase.to_sym]
+  rescue
+    raise 'Unknown direction'
   end
 
   # Move means taking one step in the speicified direction
@@ -27,24 +27,32 @@ class Direction
 
   # Choose the (n-1)th element of the array (circular) ORDER
   def right
-    ORDER[
-      (ORDER.index(
-        Direction::DELTA.select { |_k, v| v == @delta_point.pos }.keys.first
-      ) - 1) % 4
-    ]
+    self.delta_point = Direction::DELTA[ORDER[(ORDER.index(direction) - 1) % 4]]
+    direction
   end
 
   # Choose the (n+1)th element of the array (circular) ORDER
   def left
-    ORDER[
-      (ORDER.index(
-        Direction::DELTA.select { |_k, v| v == @delta_point.pos }.keys.first
-      ) + 1) % 4
-    ]
+    self.delta_point = Direction::DELTA[ORDER[(ORDER.index(direction) + 1) % 4]]
+    direction
+  end
+
+  def direction
+    Direction::DELTA.select { |_k, v| v == @delta_point.pos }.keys.first
   end
 
   def to_s
-    Direction::DELTA.select { |_k, v| v == @delta_point.pos }
-                    .keys.first.to_s.upcase
+    direction.to_s.upcase
+  end
+
+  def delta_point=(value)
+    if value.is_a?(Array) && value.length == 2
+      @delta_point = Point.new(*value)
+    elsif value.is_a?(Point)
+      @delta_point = value
+    else
+      raise 'Invalid Assignement for a point'
+    end
+    @delta_point
   end
 end

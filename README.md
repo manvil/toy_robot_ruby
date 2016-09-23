@@ -40,6 +40,9 @@ Click [here](https://drive.google.com/open?id=0B5PS3EHB5K-bOEh0dzlQZjFwckk)
     
 > NOTE: The case of the commands does not matter.
 
+#### Test
+Run `ruby path_to_folder/test.rb`
+
 #### LICENSE
 
 Licensed under [MIT](http://mit-license.org).

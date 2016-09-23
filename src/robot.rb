@@ -7,13 +7,19 @@ class Robot
   end
 
   def direction=(new_direction)
-    raise "Unknown direction => #{new_direction}" unless Direction::DELTA.include?(new_direction)
-    direction.delta_point = Point.new(*Direction::DELTA[new_direction])
+    unless Direction::DELTA.include?(new_direction)
+      raise "Unknown direction => #{new_direction}"
+    end
+    @direction.delta_point = Direction::DELTA[new_direction]
   end
 
   def point=(point)
     @point.x = point.x
     @point.y = point.y
+  end
+
+  def turn(side)
+    @direction.send(side)
   end
 
   def to_s
